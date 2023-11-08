@@ -7,6 +7,7 @@ import NavBar from './NavBar';
 import imagenProducto1 from '../assets/producto1.png';
 import imagenProducto2 from '../assets/producto2.png';
 import imagenProducto3 from '../assets/producto3.png';
+import ItemCount from './ItemCount';
 
 const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
@@ -66,6 +67,7 @@ const ItemListContainer = () => {
       >
         <ItemList items={productos} images={images} seleccionCategoria={seleccionCategoria} onProductoSeleccionado={selectSelect} />
         {seleccionProducto && <ItemDetailContainer item={seleccionProducto} />}
+        <ItemCount />
       </Container>
     </div>
   );

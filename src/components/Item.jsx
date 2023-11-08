@@ -10,7 +10,7 @@ const Item = ({ item, onProductoSeleccionado, images }) => {
 
   return (
     <div>
-      <Card className="mx-4" style={{ width: '18rem' }}>
+      <Card className="mx-4 my-5" style={{ width: '18rem' }}>
         <Card.Img variant="top" src={images[imageKey]} />
         <Card.Body className="text-center">
           <Card.Title>{title}</Card.Title>
