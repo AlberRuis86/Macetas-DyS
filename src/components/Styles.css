@@ -7,6 +7,22 @@
   }
 
 .mi-imagen {
-    width: 800px;
+    width: 400px;
     height: 400px;
-} 
+    margin: 10px;
+}
+
+.mi-carrousel{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+}
+
+.toast-center{
+    text-align: center;
+    width: 100%;
+    color: #d15f03;
+}
+
+.icono {
+    width: 60px;
+    height:40px;
+}
