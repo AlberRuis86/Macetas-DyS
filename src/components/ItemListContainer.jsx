@@ -1,76 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import './Styles.css';
-import ItemList from './ItemList';
-import ItemDetailContainer from './ItemDetailContainer';
-import NavBar from './NavBar';
 import imagenProducto1 from '../assets/producto1.png';
+import imagenProducto1_1 from '../assets/producto1_1.png';
+import imagenProducto1_2 from '../assets/producto1_2.png';
 import imagenProducto2 from '../assets/producto2.png';
+import imagenProducto2_1 from '../assets/producto2_1.png';
+import imagenProducto2_2 from '../assets/producto2_2.png';
 import imagenProducto3 from '../assets/producto3.png';
-import ItemCount from './ItemCount';
+import imagenProducto3_1 from '../assets/producto3_1.png';
+import imagenProducto3_2 from '../assets/producto3_2.png';
+import ItemList from './ItemList';
+import NavBar from './NavBar';
+import Carrousel from './Carrousel';
+import fetchProducts from '../utils/asyncMock';
 
 const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
-  const [seleccionProducto, setSeleccionProducto] = useState(null);
-  const [seleccionCategoria, setSeleccionCategoria] = useState();
-
-  const images = {
-    producto1: imagenProducto1,
-    producto2: imagenProducto2,
-    producto3: imagenProducto3
-  };
+  const [seleccionCategoria, setSeleccionCategoria] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      const listaProductos = [
-        {
-          id: 1,
-          title: "Producto 1",
-          description: "Descripción 1",
-          price: 1000,
-          category: "Categoría 1",
-          imageKey: 'producto1'
-        },
-        {
-          id: 2,
-          title: "Producto 2",
-          description: "Descripción 2",
-          price: 1500,
-          category: "Categoría 2",
-          imageKey: 'producto2'
-        },
-        {
-          id: 3,
-          title: "Producto 3",
-          description: "Descripción 3",
-          price: 2000,
-          category: "Categoría 3",
-          imageKey: 'producto3'
-        },
-      ];
+    const obtenerProductos = async () => {
+      const productosObtenidos = await fetchProducts();
+      setProductos(productosObtenidos);
+    };
 
-      setProductos(listaProductos);
-    }, 2000);
+    obtenerProductos();
   }, []);
 
-  const selectSelect = (product) => {
-    setSeleccionProducto(product);
+  const handleCategoriaChange = (categoria) => {
+    setSeleccionCategoria(categoria);
   };
 
   return (
     <div>
-      <NavBar setSeleccionCategoria={setSeleccionCategoria} />
+      <NavBar setSeleccionCategoria={handleCategoriaChange} />
+
       <Container
         className="d-grid justify-content-center align-items-center background-green"
         fluid
         style={{ height: "100vh", width: "100vw" }}
       >
-        <ItemList items={productos} images={images} seleccionCategoria={seleccionCategoria} onProductoSeleccionado={selectSelect} />
-        {seleccionProducto && <ItemDetailContainer item={seleccionProducto} />}
-        <ItemCount />
+        {seleccionCategoria === 'Todas' && (
+          <Carrousel productos={productos} />
+        )}
+        {seleccionCategoria !== 'Todas' && (
+          <ItemList
+            items={productos.filter((item) =>
+              seleccionCategoria ? item.category === seleccionCategoria : true
+            )}
+            categoriaSeleccionada={seleccionCategoria}
+            images={{
+              producto1: imagenProducto1,
+              producto1_1: imagenProducto1_1,
+              producto1_2: imagenProducto1_2,
+              producto2: imagenProducto2,
+              producto2_1: imagenProducto2_1,
+              producto2_2: imagenProducto2_2,
+              producto3: imagenProducto3,
+              producto3_1: imagenProducto3_1,
+              producto3_2: imagenProducto3_2,
+            }}
+          />
+        )}
       </Container>
     </div>
   );
-}
+};
 
 export default ItemListContainer;

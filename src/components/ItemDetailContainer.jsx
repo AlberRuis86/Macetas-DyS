@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import ItemDetail from './ItemDetail';
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({ item, onVolver, images }) => {
   return (
-    <div>ItemDetailContainer</div>
-  )
-}
+    <ItemDetail item={item} onVolver={onVolver} images={images} />
+  );
+};
 
-export default ItemDetailContainer
+export default ItemDetailContainer;

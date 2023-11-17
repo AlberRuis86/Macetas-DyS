@@ -24,17 +24,17 @@ const ItemCount = () => {
   };
 
   return (
-    <div className='bg-black text-center p-2 rounded m-auto'>
-      <Button className='mx-2' variant="warning" onClick={increment}>
+    <div className='text-center my-1 rounded'>
+      <Button className='' variant="warning" onClick={increment}>
         +
       </Button>{' '}
-      <Badge className='mx-2 p-2' bg="warning" text="dark">
+      <Badge className='' bg="warning" text="dark">
         {count}
       </Badge>
-      <Button className='mx-2' variant="warning" onClick={decrement}>
+      <Button className='' variant="warning" onClick={decrement}>
         -
       </Button>{' '}
-      <Button className='mx-2' variant="warning" onClick={addToCart}>
+      <Button className='' variant="warning" onClick={addToCart}>
         Agregar al Carrito
       </Button>{' '}
       <ToastContainer position="bottom-end">
