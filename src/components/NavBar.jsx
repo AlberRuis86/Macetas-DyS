@@ -4,14 +4,12 @@ import CartWidget from './CartWidget';
 import './Styles.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-const NavBar = ({ setSeleccionCategoria }) => {
+const NavBar = ({ categoria }) => {
   const navigate = useNavigate();
 
   const handleCategoriaClick = (categoria) => {
-    setSeleccionCategoria(categoria);
     navigate(categoria === "Todas" ? '/productos' : `/productos/${categoria}`);
   };
-
 
   return (
     <Navbar fixed="top" bg="black" variant="dark" expand="lg">

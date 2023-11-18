@@ -35,7 +35,7 @@ function CarrouselContainer() {
 
           <Image className='mi-imagen' src={imagenProducto2_2} alt="imagen" rounded />  
  
-        </Carousel.Item>
+        </Carousel.Item >
         <Carousel.Item>
           <Image className='mi-imagen' src={imagenProducto3} alt="imagen" rounded />  
           <Carousel.Caption>
