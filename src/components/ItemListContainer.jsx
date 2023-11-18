@@ -12,12 +12,12 @@ import imagenProducto3_1 from '../assets/producto3_1.png';
 import imagenProducto3_2 from '../assets/producto3_2.png';
 import ItemList from './ItemList';
 import NavBar from './NavBar';
-import Carrousel from './Carrousel';
 import fetchProducts from '../utils/asyncMock';
+import { useParams } from 'react-router-dom';
 
 const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
-  const [seleccionCategoria, setSeleccionCategoria] = useState(null);
+  const { categoria } = useParams();
 
   useEffect(() => {
     const obtenerProductos = async () => {
@@ -26,30 +26,23 @@ const ItemListContainer = () => {
     };
 
     obtenerProductos();
-  }, []);
-
-  const handleCategoriaChange = (categoria) => {
-    setSeleccionCategoria(categoria);
-  };
+  }, [categoria]);
 
   return (
     <div>
-      <NavBar setSeleccionCategoria={handleCategoriaChange} />
+      <NavBar categoria={categoria} />
 
       <Container
         className="d-grid justify-content-center align-items-center background-green"
         fluid
         style={{ height: "100vh", width: "100vw" }}
       >
-        {seleccionCategoria === 'Todas' && (
-          <Carrousel productos={productos} />
-        )}
-        {seleccionCategoria !== 'Todas' && (
+        {categoria !== 'Todas' && (
           <ItemList
             items={productos.filter((item) =>
-              seleccionCategoria ? item.category === seleccionCategoria : true
+              categoria ? item.category === categoria : true
             )}
-            categoriaSeleccionada={seleccionCategoria}
+            categoriaSeleccionada={categoria}
             images={{
               producto1: imagenProducto1,
               producto1_1: imagenProducto1_1,

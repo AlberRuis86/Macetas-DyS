@@ -4,22 +4,21 @@ import Home from './components/Home';
 import Cart from './components/Cart';
 import Footer from './components/Footer';
 import ItemListContainer from './components/ItemListContainer';
+import ItemDetailContainer from './components/ItemDetailContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
 
 const App = () => {
-
-  const [seleccionCategoria, setSeleccionCategoria] = useState(null);
 
   return (
     <div>
       <BrowserRouter>
-      <NavBar setSeleccionCategoria={setSeleccionCategoria} />
+      <NavBar />
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/productos" element={<ItemListContainer />} />
           <Route path="/productos/:categoria" element={<ItemListContainer />} />
+          <Route path="/item/:id" element={<ItemDetailContainer />} />
         </Routes>
         <Footer />
       </BrowserRouter>
@@ -28,4 +27,3 @@ const App = () => {
 };
 
 export default App;
-
