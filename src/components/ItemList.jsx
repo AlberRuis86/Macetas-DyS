@@ -26,9 +26,12 @@ const ItemList = ({ items, categoriaSeleccionada, images }) => {
   const productosFiltrados = categoriaSeleccionada
     ? items.filter(item => item.category === categoriaSeleccionada)
     : items;
-  
+
   return (
-    <div className="overflow-x-hidden overflow-y-auto" style={{ maxHeight: 'calc(100vh - 100px)' }}>
+    <div
+      className="overflow-x-hidden overflow-y-auto"
+      style={{ maxHeight: "calc(100vh - 100px)" }}
+    >
       <Row className="justify-content-center">
         {productosFiltrados.map((item) => (
           <Col key={item.id} xs={12} sm={6} md={4} lg={4} xl={4}>
@@ -36,6 +39,7 @@ const ItemList = ({ items, categoriaSeleccionada, images }) => {
               item={item}
               onProductoSeleccionado={selectSelect}
               images={images}
+              imageKey={item.imageKey}
             />
           </Col>
         ))}
@@ -43,5 +47,5 @@ const ItemList = ({ items, categoriaSeleccionada, images }) => {
     </div>
   );
 };
-  
+
 export default ItemList;

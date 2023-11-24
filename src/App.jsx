@@ -8,11 +8,10 @@ import ItemDetailContainer from './components/ItemDetailContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
-
   return (
     <div>
       <BrowserRouter>
-      <NavBar />
+        <NavBar />
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
