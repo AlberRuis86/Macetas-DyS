@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { Button, Badge, Toast, ToastContainer } from 'react-bootstrap';
 import "./Styles.css";
 
-const ItemCount = () => {
+const ItemCount = ({ onAdd }) => {
   const [count, setCount] = useState(0);
-
   const [showToast, setShowToast] = useState(false);
 
   const addToCart = () => {
+    console.log('Agregado al carrito desde ItemCount:', count);
     setShowToast(true);
-  };
+    onAdd(count);
+  };  
 
   const decrement = () => {
     if (count > 0) {
@@ -40,11 +41,7 @@ const ItemCount = () => {
       <ToastContainer position="bottom-end">
         <Toast show={showToast} onClose={() => setShowToast(false)}>
           <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
+            <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
             <strong className="me-auto toast-center">Felicitaciones!!!</strong>
           </Toast.Header>
           <Toast.Body>Has agregado {count} productos al carrito.</Toast.Body>
