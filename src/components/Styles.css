@@ -1,7 +1,3 @@
-.primary-text-color{
-    color: #d15f03;
-}
-
 .background-green {
     background-color: #66aa84;
   }
@@ -20,9 +16,4 @@
     text-align: center;
     width: 100%;
     color: #d15f03;
-}
-
-.icono {
-    width: 60px;
-    height:40px;
 }

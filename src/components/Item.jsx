@@ -2,21 +2,23 @@ import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './Styles.css';
 
-const Item = ({ item, onProductoSeleccionado, images, mostrarDetalle }) => {
-  const { title, price, imageKey } = item;
+const Item = ({ item, onProductoSeleccionado }) => {
+  const { nombre, precio, imagen } = item;
+
+  const handleItemClick = () => {
+    onProductoSeleccionado(item);
+  };
 
   return (
-    <div>
-      <Card className="mx-auto my-4" style={{ width: '18rem', height: '400px' }}>
-        <Card.Img variant="top" src={images[imageKey]} style={{ objectFit: 'cover', height: '60%' }} />
-        <Card.Body className="text-center" style={{ height: '40%' }}>
-          <Card.Title>{title}</Card.Title>
-          <Card.Text>Precio: ${price}</Card.Text>
-          {!mostrarDetalle && (
-            <Button variant="warning" onClick={() => onProductoSeleccionado(item)}>
-              Ver Detalles
-            </Button>
-          )}
+    <div className="item" onClick={handleItemClick}>
+      <Card className="mx-auto my-4" style={{ width: '18rem', height: '100%' }}>
+        <Card.Img variant="top" src={imagen} style={{ objectFit: 'cover', height: '50%' }} />
+        <Card.Body className="text-center" style={{ height: '50%' }}>
+          <Card.Title>{nombre}</Card.Title>
+          <Card.Text>Precio: ${precio}</Card.Text>
+          <Button variant="warning" onClick={() => onProductoSeleccionado(item)}>
+            Ver Detalles
+          </Button>
         </Card.Body>
       </Card>
     </div>

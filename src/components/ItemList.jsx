@@ -4,7 +4,7 @@ import Item from './Item';
 import ItemDetailContainer from './ItemDetailContainer';
 import { Row, Col } from 'react-bootstrap';
 
-const ItemList = ({ items, categoriaSeleccionada, images }) => {
+const ItemList = ({ items, categoriaSeleccionada }) => {
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
   const selectSelect = (product) => {
@@ -18,24 +18,26 @@ const ItemList = ({ items, categoriaSeleccionada, images }) => {
   if (productoSeleccionado) {
     return (
       <div className="d-flex justify-content-center">
-        <ItemDetailContainer item={productoSeleccionado} onVolver={volverALista} images={images} />
+        <ItemDetailContainer item={productoSeleccionado} onVolver={volverALista} />
       </div>
     );
   }
 
   const productosFiltrados = categoriaSeleccionada
-    ? items.filter(item => item.category === categoriaSeleccionada)
+    ? items.filter(item => item.categoria === categoriaSeleccionada)
     : items;
-  
+
   return (
-    <div className="overflow-x-hidden overflow-y-auto" style={{ maxHeight: 'calc(100vh - 100px)' }}>
+    <div
+      className="overflow-x-hidden overflow-y-auto"
+      style={{ maxHeight: "calc(100vh - 100px)" }}
+    >
       <Row className="justify-content-center">
         {productosFiltrados.map((item) => (
-          <Col key={item.id} xs={12} sm={6} md={4} lg={4} xl={4}>
+          <Col key={item.id} >
             <Item
               item={item}
               onProductoSeleccionado={selectSelect}
-              images={images}
             />
           </Col>
         ))}
@@ -43,5 +45,5 @@ const ItemList = ({ items, categoriaSeleccionada, images }) => {
     </div>
   );
 };
-  
+
 export default ItemList;
