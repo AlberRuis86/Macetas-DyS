@@ -3,31 +3,27 @@ import { Card, Button } from 'react-bootstrap';
 import ItemCount from './ItemCount';
 import { useCart } from '../context/CartContext';
 
-const ItemDetail = ({ item, onVolver, images }) => {
-  const { addItem, isInCart } = useCart();
+const ItemDetail = ({ producto, onVolver }) => {
+  const { addItem } = useCart();
 
-  if (!item) {
+  if (!producto) {
     return <div>Cargando...</div>;
   }
 
-  const { id, title, description, price, imageKey } = item;
+  const { nombre, descripcion, precio, imagen } = producto;
 
-  const handleAddToCart = (count) => {
-    if (!isInCart(id)) {
-      addItem({ ...item, image: images[imageKey] }, count);
-    } else {
-      alert(`${title} ya está en el carrito. No se agregó nuevamente.`);
-    }
-  }; 
+  const handleAddToCart = (count) => { 
+      addItem({ ...producto }, count);
+  };   
 
   return (
     <Card className="bg-light mx-4 my-5" style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={images[imageKey]} />
+      <Card.Img variant="top" src={imagen} />
       <Card.Body className="text-center">
-        <Card.Title>{title}</Card.Title>
-        <Card.Text>Descripción: {description}</Card.Text>
-        <Card.Text>Precio: ${price}</Card.Text>
-        <ItemCount onAdd={handleAddToCart} item={item} />
+        <Card.Title>{nombre}</Card.Title>
+        <Card.Text>Descripción: {descripcion}</Card.Text>
+        <Card.Text>Precio: ${precio}</Card.Text>
+        <ItemCount onAdd={handleAddToCart} producto={producto} />
         <Button variant="success" onClick={onVolver}>
           Volver
         </Button>

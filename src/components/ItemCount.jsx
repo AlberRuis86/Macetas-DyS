@@ -7,7 +7,6 @@ const ItemCount = ({ onAdd }) => {
   const [showToast, setShowToast] = useState(false);
 
   const addToCart = () => {
-    console.log('Agregado al carrito desde ItemCount:', count);
     setShowToast(true);
     onAdd(count);
   };  
@@ -41,7 +40,6 @@ const ItemCount = ({ onAdd }) => {
       <ToastContainer position="bottom-end">
         <Toast show={showToast} onClose={() => setShowToast(false)}>
           <Toast.Header>
-            <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
             <strong className="me-auto toast-center">Felicitaciones!!!</strong>
           </Toast.Header>
           <Toast.Body>Has agregado {count} productos al carrito.</Toast.Body>

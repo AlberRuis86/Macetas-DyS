@@ -6,7 +6,6 @@ const CartContext = createContext();
 // Estado inicial del carrito
 const initialState = {
     items: [],
-    images: {},
   };
 
 // Acciones
@@ -22,23 +21,15 @@ const cartReducer = (state, action) => {
     case actionTypes.ADD_ITEM:
       const newItem = {
         id: action.payload.id,
-        title: action.payload.title,
-        price: action.payload.price,
+        nombre: action.payload.nombre,
+        precio: action.payload.precio,
         quantity: action.payload.quantity,
-        image: action.payload.image,
+        imagen: action.payload.imagen,
       };
-
-      const updatedImages = {
-        ...state.images,
-        [action.payload.id]: action.payload.image,
-      };
-
-      console.log('Nuevo estado de images:', updatedImages);
 
       return {
         ...state,
         items: [...state.items, newItem],
-        images: updatedImages,
       };
     case actionTypes.REMOVE_ITEM:
       return {
@@ -53,6 +44,7 @@ const cartReducer = (state, action) => {
     default:
       return state;
   }
+
 };
 
 // Proveedor del contexto
@@ -60,16 +52,17 @@ const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   const addItem = (item, quantity) => {
-    dispatch({
-      type: actionTypes.ADD_ITEM,
-      payload: {
-        id: item.id,
-        title: item.title,
-        price: item.price,
-        quantity: quantity,
-        image: item.image,
-      },
-    });
+
+      dispatch({
+        type: actionTypes.ADD_ITEM,
+        payload: {
+          id: item.id,
+          nombre: item.nombre,
+          precio: item.precio,
+          quantity: quantity,
+          imagen: item.imagen,
+        },
+      });
   };
 
   const removeItem = (itemId) => {
@@ -86,7 +79,7 @@ const CartProvider = ({ children }) => {
   };
 
   const isInCart = (id) => {
-    return state.items.some((item) => item.id === id);
+    return state.items.find((item) => item.id === id);
   };  
 
   const calcItemsQty = () => {
@@ -95,13 +88,14 @@ const CartProvider = ({ children }) => {
 
   // Calculo del precio total de los items en el carrito
   const getTotalPrice = () => {
-    return state.items.reduce((total, item) => total + item.price * item.quantity, 0);
+    return state.items.reduce((total, item) => total + item.precio * item.quantity, 0);
   };
+
 
   return (
     <CartContext.Provider
-      value={{ items: state.items, images: state.images, addItem, removeItem, clear, isInCart, getTotalPrice, calcItemsQty }}
-    >
+      value={{ items: state.items, addItem, removeItem, clear, isInCart, getTotalPrice, calcItemsQty }}
+      >
       {children}
     </CartContext.Provider>
   );

@@ -35,31 +35,31 @@ const NavBar = ({ categoria }) => {
                   </NavDropdown.Item>
                 </Link>
                 <Link
-                  to="/productos/categoria1"
+                  to="/productos/Categoria 1"
                   className="text-decoration-none text-center"
                 >
                   <NavDropdown.Item
-                    onClick={() => handleCategoriaClick("Categoría 1")}
+                    onClick={() => handleCategoriaClick("Categoria 1")}
                   >
                     Categoría 1
                   </NavDropdown.Item>
                 </Link>
                 <Link
-                  to="/productos/categoria2"
+                  to="/productos/Categoria 2"
                   className="text-decoration-none text-center"
                 >
                   <NavDropdown.Item
-                    onClick={() => handleCategoriaClick("Categoría 2")}
+                    onClick={() => handleCategoriaClick("Categoria 2")}
                   >
                     Categoría 2
                   </NavDropdown.Item>
                 </Link>
                 <Link
-                  to="/productos/categoria3"
+                  to="/productos/Categoria 3"
                   className="text-decoration-none text-center"
                 >
                   <NavDropdown.Item
-                    onClick={() => handleCategoriaClick("Categoría 3")}
+                    onClick={() => handleCategoriaClick("Categoria 3")}
                   >
                     Categoría 3
                   </NavDropdown.Item>

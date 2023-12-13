@@ -1,37 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import { getDoc, doc, getFirestore } from "firebase/firestore";
 import ItemDetail from './ItemDetail';
-import fetchProducts from '../utils/asyncMock';
 
-const ItemDetailContainer = ({ item, onVolver, images }) => {
-  const [producto, setProducto] = useState(null);
-  const [loading, setLoading] = useState(true);
+const ItemDetailContainer = ({ item, onVolver }) => {
+  const [producto, setProducto] = useState({});
 
   useEffect(() => {
     const obtenerProducto = async () => {
       try {
-        const productosObtenidos = await fetchProducts(item.id);
-        const productoObtenido = productosObtenidos.find(producto => producto.id === item.id);
-        setProducto(productoObtenido);
+        const db = getFirestore();
+        const oneItem = doc(db, "plantas", item.id);
+        const snapshot = await getDoc(oneItem);
+
+        if (snapshot.exists()) {
+          const docData = snapshot.data();
+          setProducto(docData);
+        }
       } catch (error) {
         console.error("Error fetching producto:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     obtenerProducto();
   }, [item.id]);
 
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
-
-  if (!producto) {
-    console.error("Producto no disponible.");
-    return null;
-  }
-
-  return <ItemDetail item={producto} onVolver={onVolver} images={images} />;
+  return (
+    <ItemDetail producto={producto} onVolver={onVolver} />
+  );
 };
 
 export default ItemDetailContainer;
