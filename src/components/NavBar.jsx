@@ -1,14 +1,14 @@
-import React from 'react';
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-import CartWidget from './CartWidget';
-import './Styles.css';
-import { Link, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import CartWidget from "./CartWidget";
+import "./Styles.css";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = ({ categoria }) => {
   const navigate = useNavigate();
 
   const handleCategoriaClick = (categoria) => {
-    navigate(categoria === "Todas" ? '/productos' : `/productos/${categoria}`);
+    navigate(categoria === "Todas" ? "/productos" : `/productos/${categoria}`);
   };
 
   return (
@@ -69,11 +69,9 @@ const NavBar = ({ categoria }) => {
           </Container>
         </Navbar.Collapse>
         <Nav className="justify-content-end">
-          <Link to="/cart">
-            <Nav.Link>
-              <CartWidget />
-            </Nav.Link>
-          </Link>
+          <Nav.Link as={Link} to="/cart">
+            <CartWidget />
+          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>
